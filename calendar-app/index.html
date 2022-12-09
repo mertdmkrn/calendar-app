@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://kit.fontawesome.com/adcd4b99d5.js" crossorigin="anonymous"></script>
+    <title>Calendar</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="datebar">
+        <div class="left"></div>
+        <div class="middle">
+          <div class="dateleftarrow">
+            <i class="fa-solid fa-arrow-left" @click="prevMonth()"></i>
+          </div>
+          <div class="datetext">
+            <p>{{monthList[month]}}</p>
+            <h3>{{year}}</h3>
+            <input type="date" v-model="chooseDay" @change="inputChanged" />
+          </div>
+          <div class="daterightarrow">
+            <i class="fa-solid fa-arrow-right" @click="nextMonth()"></i>
+          </div>
+        </div>
+        <div class="right"></div>
+      </div>
+      <div class="daysbar">
+        <div class="days" v-for="day in dayList" :key="day">{{day}}</div>
+      </div>
+      <div class="daysbox">
+        <div class="daybox" v-for="monthDay in monthDays" :key="monthDay.getTime()" :class="{active : monthDay.getMonth() === month}">
+          <div class="content">
+            <span class="dayNumber">{{monthDay.getDate()}}</span>
+            <button v-show="monthDay.getMonth() == month" class="addButton"><i class="fa-solid fa fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>
